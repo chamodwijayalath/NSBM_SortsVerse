@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Treat all .php files as PHP (not Hack)
+*.php linguist-language=PHP
