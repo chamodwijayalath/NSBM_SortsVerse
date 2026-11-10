@@ -1,0 +1,44 @@
+NSBM SportsHub
+
+Member 5 - Backend Developer
+
+Responsibilities
+- Authentication
+- Users Management
+- Roles Management
+- Session Management
+- Permissions
+- Validation
+- Booking Backend
+
+Week 01 Backend Plan
+
+Authentication
+- Register
+- Login
+- Logout
+
+Roles
+- Admin
+- Student
+
+Session Management
+- Create Session after Login
+- Destroy Session after Logout
+
+Permissions
+
+Admin
+- Manage Users
+- Approve Bookings
+
+Student
+- Create Booking
+- View Profile
+
+Booking Backend
+- Create Booking
+- View Booking
+- Approve Booking
+- Reject Booking
+``
