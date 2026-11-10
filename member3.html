@@ -1,0 +1,569 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSBM SportsVerse</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #08111f;
+    color: #edf4f8;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    background: #07101b;
+    border-bottom: 1px solid #29394b;
+    padding: 16px 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo span,
+.mint {
+    color: #50d7b4;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+nav button,
+.btn {
+    background: #203145;
+    color: #eaf4f7;
+    border: 1px solid #35495c;
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+nav button:hover,
+.btn:hover,
+nav button.active {
+    border-color: #50d7b4;
+    color: #50d7b4;
+}
+
+.wrap {
+    max-width: 1440px;
+    margin: auto;
+    padding: 24px;
+}
+
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr .8fr;
+    gap: 15px;
+}
+
+.panel,
+.card {
+    background: linear-gradient(145deg, #142235, #0e1927);
+    border: 1px solid #29394b;
+    border-radius: 13px;
+    padding: 18px;
+    min-width: 0;
+}
+
+.welcome {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.welcome h1 {
+    font-size: clamp(23px, 3vw, 34px);
+}
+
+.muted {
+    color: #9aabba;
+}
+
+.points {
+    font-size: 32px;
+    font-weight: bold;
+    color: #50d7b4;
+}
+
+.actions,
+.stats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    margin: 3px 0;
+}
+
+.stat {
+    background: #192b3e;
+    padding: 12px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 85px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 22px;
+    color: #50d7b4;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.pill {
+    display: inline-block;
+    background: #153d38;
+    color: #67e1c4;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.card p {
+    color: #9aabba;
+    line-height: 1.5;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    background: #0b1725;
+    border: 1px solid #34475a;
+    border-radius: 8px;
+    color: white;
+    margin: 5px 0 14px;
+}
+
+.formgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+}
+
+.leader {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #29394b;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar span {
+    background: #192a3d;
+    padding: 8px 2px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.notice {
+    color: #62dcbf;
+    min-height: 20px;
+}
+
+.footer {
+    border-top: 1px solid #29394b;
+    margin-top: 30px;
+    padding: 22px 0;
+    color: #9aabba;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .welcome {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome {
+        grid-column: span 1;
+    }
+
+    .wrap {
+        padding: 14px;
+    }
+
+    nav button {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        🏅 NSBM <span>SportsVerse</span>
+    </div>
+
+    <nav>
+        <button class="active" onclick="showPage('home',this)">Home</button>
+        <button onclick="showPage('about',this)">About</button>
+        <button onclick="showPage('clubs',this)">Sports Clubs</button>
+        <button onclick="showPage('matches',this)">Matches</button>
+        <button onclick="showPage('tournaments',this)">Tournaments</button>
+        <button onclick="showPage('leaderboard',this)">Leaderboard</button>
+        <button onclick="showPage('booking',this)">Facilities</button>
+    </nav>
+</header>
+
+<main class="wrap">
+
+<!-- HOME DASHBOARD -->
+<section id="home" class="view active">
+
+<div class="grid">
+
+    <div class="panel welcome">
+        <div>
+            <span class="pill">NSBM GREEN UNIVERSITY</span>
+
+            <h1>Welcome back,
+                <span class="mint">Student!</span> 👋
+            </h1>
+
+            <p class="muted">
+                Play together. Achieve together.
+                Stay connected with your sports community.
+            </p>
+
+            <div class="actions">
+                <button class="btn" onclick="showPage('booking')">
+                    Book Facility
+                </button>
+
+                <button class="btn" onclick="showPage('matches')">
+                    View Matches
+                </button>
+
+                <button class="btn" onclick="showPage('clubs')">
+                    Join Club
+                </button>
+            </div>
+        </div>
+
+        <div style="font-size:48px">🏆</div>
+    </div>
+
+    <div class="panel">
+        <h3>My Sports Passport</h3>
+        <p class="muted">Verified Athlete · Level 4</p>
+
+        <div class="points">1,250 PTS</div>
+
+        <p>🥇 Top Scorer　🥈 Iron Player　🏆 Winner</p>
+
+        <div class="stats">
+            <div class="stat">
+                <strong>80%</strong>
+                Win rate
+            </div>
+
+            <div class="stat">
+                <strong>12</strong>
+                Matches
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3>Interactive Calendar</h3>
+        <p class="muted">October 2026</p>
+
+        <div class="calendar">
+            <span>Mon<br>19</span>
+            <span>Tue<br>20</span>
+            <span>Wed<br>21</span>
+            <span>Thu<br>22</span>
+            <span>Fri<br>23</span>
+            <span>Sat<br>24</span>
+            <span>Sun<br>25</span>
+            <span>Mon<br>26</span>
+            <span>Tue<br>27</span>
+            <span>Wed<br>28</span>
+            <span>Thu<br>29</span>
+            <span>Fri<br>30</span>
+            <span>Sat<br>31</span>
+            <span>Sun<br>1</span>
+        </div>
+
+        <p class="muted">Upcoming: Football · Main Ground</p>
+    </div>
+
+    <div class="panel">
+        <h3>Live Matches</h3>
+
+        <div class="card">
+            <span class="pill">● LIVE</span>
+            <h3>NSBM Lions 2 - 1 UCSC</h3>
+            <p>Football · Main Ground</p>
+        </div>
+
+        <div class="card">
+            <span class="pill">UPCOMING</span>
+            <h3>NSBM vs SLIIT</h3>
+            <p>Basketball · 27 Oct, 1:00 PM</p>
+        </div>
+
+        <button class="btn" onclick="showPage('matches')">
+            All matches →
+        </button>
+    </div>
+
+    <div class="panel">
+        <h3>University Leaderboard</h3>
+
+        <div class="leader">
+            🥇 Student One <b class="mint">1,250</b>
+        </div>
+
+        <div class="leader">
+            🥈 Student Two <b class="mint">1,095</b>
+        </div>
+
+        <div class="leader">
+            🥉 Student Three <b class="mint">980</b>
+        </div>
+
+        <div class="leader">
+            4. Student Four <b class="mint">680</b>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3>Sports Clubs</h3>
+        <p class="muted">Find your team and join the action.</p>
+
+        <button class="btn" onclick="showPage('clubs')">
+            Explore clubs →
+        </button>
+    </div>
+
+    <div class="panel">
+        <h3>Facility Booking</h3>
+        <p class="muted">Book courts, grounds and sports equipment.</p>
+
+        <button class="btn" onclick="showPage('booking')">
+            Request booking →
+        </button>
+    </div>
+
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="view">
+    <h1>About SportsVerse</h1>
+
+    <div class="panel">
+        <h2 class="mint">Play together. Achieve together.</h2>
+
+        <p>
+            NSBM SportsVerse is a university sports community
+            platform to discover sports clubs, follow matches
+            and tournaments, view achievements and request
+            sports facility bookings.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <strong>12+</strong> Sports clubs
+            </div>
+
+            <div class="stat">
+                <strong>20+</strong> Events
+            </div>
+
+            <div class="stat">
+                <strong>1</strong> Community
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SPORTS CLUBS -->
+<section id="clubs" class="view">
+    <h1>Sports Clubs</h1>
+
+    <p class="muted">
+        Explore clubs and find a sport you love.
+    </p>
+
+    <input
+        id="clubSearch"
+        placeholder="Search clubs..."
+        oninput="filterItems('clubSearch','.clubCard')"
+    >
+
+    <div class="cards">
+
+        <article class="card clubCard">
+            <h2>⚽ Football Club</h2>
+            <span class="pill">Open for members</span>
+            <p>Training, team matches and campus tournaments.</p>
+
+            <button class="btn" onclick="showPage('clubDetails')">
+                View details
+            </button>
+
+            <button class="btn" onclick="joinClub('Football')">
+                Join club
+            </button>
+        </article>
+
+        <article class="card clubCard">
+            <h2>🏀 Basketball Club</h2>
+            <span class="pill">Open for members</span>
+            <p>Improve skills and play with the team.</p>
+
+            <button class="btn" onclick="showPage('clubDetails')">
+                View details
+            </button>
+
+            <button class="btn" onclick="joinClub('Basketball')">
+                Join club
+            </button>
+        </article>
+
+        <article class="card clubCard">
+            <h2>🏐 Volleyball Club</h2>
+            <span class="pill">Open for members</span>
+            <p>Teamwork, training and friendly competitions.</p>
+
+            <button class="btn" onclick="showPage('clubDetails')">
+                View details
+            </button>
+
+            <button class="btn" onclick="joinClub('Volleyball')">
+                Join club
+            </button>
+        </article>
+
+        <article class="card clubCard">
+            <h2>🏸 Badminton Club</h2>
+            <span class="pill">Open for members</span>
+            <p>Practice sessions and campus events.</p>
+
+            <button class="btn" onclick="showPage('clubDetails')">
+                View details
+            </button>
+
+            <button class="btn" onclick="joinClub('Badminton')">
+                Join club
+            </button>
+        </article>
+
+    </div>
+
+    <p id="clubNotice" class="notice"></p>
+</section>
+
+<!-- CLUB DETAILS -->
+<section id="clubDetails" class="view">
+    <h1>Football Club Details</h1>
+
+    <div class="panel">
+        <span class="pill">SPORTS CLUB</span>
+
+        <h2>⚽ NSBM Football Club</h2>
+
+        <p>
+            Join training sessions, meet teammates and
+            represent the university.
+        </p>
+
+        <p><b>Venue:</b> Main Sports Ground</p>
+        <p><b>Training days:</b> Tuesday and Thursday</p>
+
+        <button class="btn" onclick="joinClub('Football')">
+            Join this club
+        </button>
+
+        <p id="detailNotice" class="notice"></p>
+    </div>
+</section>
+
+<!-- MATCHES -->
+<section id="matches" class="view">
+    <h1>Matches & Fixtures</h1>
+
+    <input
+        id="matchSearch"
+        placeholder="Search matches..."
+        oninput="filterItems('matchSearch','.matchCard')"
+    >
+
+    <div class="cards">
+
+        <article class="card matchCard">
+            <span class="pill">UPCOMING</span>
+            <h2>Inter-Faculty Football</h2>
+            <p>📅 24 October 2026 · 3:30 PM</p>
+            <p>📍 Main Sports Ground</p>
+
+            <button class="btn" onclick="showPage('matchDetails')">
+                Match details
+            </button>
+        </article>
+
+        <article class="card matchCard">
+            <span class="pill">TOURNAMENT</span>
+            <h2>Campus Basketball League</h2>
+            <p>📅 27 October 2026 ·
