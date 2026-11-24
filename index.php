@@ -6,7 +6,7 @@
 <title>NSBM SportsVerse</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/tailwind.css">
+<link rel="stylesheet" href="assets/assets/tailwind.css">
 <style>
   body { background:#0B132B; }
   .card { background:#1C2541; border:1px solid #2E3B63; border-radius:16px; }
@@ -202,6 +202,6 @@
     <p id="authDemo" class="mt-3 text-xs text-slate-500 text-center">Demo: kamal@example.com / student123 &middot; admin@example.com / admin123</p>
   </form>
 </div>
-<script src="assets/app.js"></script>
+<script src="assets/assets/app.js"></script>
 </body>
 </html>
