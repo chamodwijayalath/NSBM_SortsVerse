@@ -28,7 +28,7 @@ SportsVerse helps manage sports activities at the university, including teams, p
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/nelkapraveen35-hub/SportsVerse_NSBM.git
+   git@github.com:chamodwijayalath/NSBM_SortsVerse.git
    ```
 2. Install a local server such as XAMPP or WAMP.
 3. Copy the project folder into the `htdocs` directory.
