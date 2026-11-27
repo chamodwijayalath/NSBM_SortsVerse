@@ -34,7 +34,7 @@ SportsVerse helps manage sports activities at the university, including teams, p
 3. Copy the project folder into the `htdocs` directory.
 4. Import the SQL file from the `database/` folder into MySQL (phpMyAdmin).
 5. Update the database credentials in the `config/` folder.
-6. Open `https://nsbmsportsverse.nfy.fyi/` in your browser.
+6. Open `https://nsbmsportsverse.nfy.fyi` in your browser.
 
 ## Team
 
